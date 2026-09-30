@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diagnóstico financeiro da família | Rafael Garbelini</title>
+<meta name="description" content="Responda 10 perguntas e descubra o padrão que impede a renda da sua família de virar patrimônio.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Onde o dinheiro da sua família está vazando?">
+<meta property="og:description" content="Diagnóstico financeiro comportamental em cerca de 2 minutos, criado por Rafael Garbelini.">
+<meta property="og:url" content="https://rafaelgarbelini.com.br/quizfinanceiro/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%A7%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{
+  --bg:#08131f; --bg2:#0d2436; --card:#0f2436; --card2:#132c41; --line:#1f3a50;
+  --ink:#eaf0f4; --muted:#90a3b1; --accent:#d2692e; --accent-hi:#e27f45;
+  --accent-soft:rgba(210,105,46,.14); --danger:#e5736b; --bar:#4b6d86;
+  --font:'Outfit',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  color-scheme:dark;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;min-height:100vh;background:var(--bg);background-image:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);background-attachment:fixed;color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:600px;margin:0 auto;padding:20px 16px 48px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px 22px}
+@media(min-width:560px){.card{padding:38px 38px}}
+h1{font-size:clamp(28px,7.4vw,40px);line-height:1.12;letter-spacing:-.02em;font-weight:700;margin:0 0 14px}
+h2{font-size:clamp(22px,5.6vw,28px);line-height:1.2;font-weight:600;letter-spacing:-.01em;margin:6px 0 22px}
+h3{font-size:18px;font-weight:600;margin:28px 0 8px}
+h1:focus,h2:focus{outline:none}
+p{margin:0 0 12px}
+.lead{color:var(--muted);font-size:18px;margin:0 0 22px;max-width:46ch}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 28px}
+.pill{border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:14px;color:var(--muted);background:rgba(255,255,255,.02)}
+.by{color:var(--muted);font-size:14px;margin:22px 0 0}
+.btn{display:block;width:100%;border:0;border-radius:12px;padding:16px 20px;font:600 17px var(--font);cursor:pointer;text-align:center;text-decoration:none;transition:background .15s,border-color .15s}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-hi)}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--muted)}
+.btn + .btn{margin-top:10px}
+:focus-visible{outline:3px solid #f0a06a;outline-offset:2px}
+.progress{height:4px;border-radius:4px;background:var(--line);overflow:hidden;margin-bottom:18px}
+.progress i{display:block;height:100%;background:var(--accent);transition:width .3s}
+.step{color:var(--muted);font-size:14px;margin:0}
+.opts{display:grid;gap:10px}
+.opt{display:block;width:100%;text-align:left;background:var(--card2);color:var(--ink);border:1.5px solid var(--line);border-radius:14px;padding:15px 16px;font:400 17px/1.35 var(--font);cursor:pointer;transition:border-color .15s,background .15s}
+.opt:hover{border-color:#3a5a73}
+.opt[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.otherbox{margin-top:14px;padding-top:2px}
+.nav{display:flex;gap:10px;margin-top:20px}
+.nav .btn{width:auto;margin:0}
+.nav .btn-primary{flex:1}
+.nav .btn-ghost{padding:14px 20px}
+label.f{display:block;font-size:15px;font-weight:500;color:var(--muted);margin:16px 0 6px}
+input[type=text],input[type=tel],input[type=email],select{width:100%;background:#0a1b2a;color:var(--ink);border:1.5px solid var(--line);border-radius:12px;padding:14px;font:400 17px var(--font)}
+input:focus,select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px rgba(210,105,46,.3)}
+input[aria-invalid="true"],select[aria-invalid="true"]{border-color:var(--danger)}
+.err{color:var(--danger);font-size:14px;margin:6px 0 0}
+.check{display:flex;gap:12px;align-items:flex-start;margin-top:20px;font-size:14px;color:var(--muted);line-height:1.45}
+.check input{flex:0 0 20px;width:20px;height:20px;margin-top:2px;accent-color:var(--accent)}
+.small{font-size:13px;color:var(--muted)}
+.tag{color:var(--muted);font-size:15px;margin:0}
+.leak{font-size:clamp(32px,9vw,46px);line-height:1.04;font-weight:700;letter-spacing:-.025em;margin:4px 0 12px}
+.sum{font-size:19px;line-height:1.4;margin:0 0 4px;max-width:36ch}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:24px 0 4px}
+.fact{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.fact b{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-bottom:2px}
+.fact span{font-weight:600;font-size:16px;line-height:1.3;display:block}
+@media(max-width:420px){.facts{grid-template-columns:1fr}}
+.bars{margin-top:8px}
+.row{margin:13px 0}
+.lbl{display:flex;justify-content:space-between;font-size:15px}
+.bar{height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;width:0;background:var(--bar);transition:width .9s cubic-bezier(.2,.7,.2,1)}
+.row.main .bar i{background:var(--accent)}
+.row.main .lbl{font-weight:600}
+.list{padding-left:20px;margin:0}
+.list li{margin:8px 0}
+.cta{margin-top:32px;border:1.5px solid var(--accent);background:var(--accent-soft);border-radius:18px;padding:22px 20px}
+.cta h3{margin-top:0}
+.status{min-height:20px;margin:10px 0 0;font-size:14px;color:var(--muted)}
+.again{background:none;border:0;color:var(--muted);font:400 15px var(--font);text-decoration:underline;cursor:pointer;margin:18px auto 0;display:block;padding:8px}
+.foot{color:var(--muted);font-size:12.5px;margin:20px 4px 0;line-height:1.5}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media print{
+  :root{--bg:#fff;--bg2:#fff;--card:#fff;--card2:#f4f6f8;--line:#d5dde3;--ink:#111;--muted:#55636e;--accent-soft:#fdf0e8;--bar:#7f97a8;color-scheme:light}
+  body{background:#fff}
+  .noprint{display:none!important}
+  .card{border:0;padding:0}
+}
+</style>
+</head>
+<body>
+<div class="wrap"><main id="app"></main></div>
+<noscript><p style="padding:24px">Ative o JavaScript para responder ao diagnóstico.</p></noscript>
+
+<script>
+(function(){
+'use strict';
+
+var PHONE = '5511970678711';
+var INCOMES = ['Até R$ 10 mil','R$ 10 mil a R$ 15 mil','R$ 15 mil a R$ 20 mil','R$ 20 mil a R$ 30 mil','R$ 30 mil a R$ 50 mil','Acima de R$ 50 mil'];
+
+var LEAKS = {
+  PA:{name:'Piloto Automático',
+      sum:'O mês acontece e o dinheiro some. Você nunca decidiu para onde ele foi.',
+      daily:['Você só descobre quanto gastou quando a fatura chega.','As contas são pagas, mas nenhuma decisão de verdade é tomada sobre o dinheiro.','No fim do mês a pergunta é sempre "para onde foi?", nunca "para onde eu mandei?".'],
+      cost:'Quem vive no piloto automático trabalha o mês inteiro para sustentar o mês seguinte. A renda passa pela família, mas não vira patrimônio para ela.',
+      step:'Escolha um valor, mesmo pequeno, e separe no dia em que a renda entra, antes de qualquer gasto. É o primeiro ato de decisão sobre o seu dinheiro.'},
+  UP:{name:'Inflação de Vida',
+      sum:'A renda sobe, o padrão de vida sobe junto. E a sobra continua a mesma.',
+      daily:['Cada aumento de renda vira mensalidade nova, parcela nova ou hábito novo.','Você ganha melhor do que há alguns anos, mas a sensação de folga é a mesma.','O padrão da família depende cada vez mais de a renda continuar subindo.'],
+      cost:'Um padrão de vida que só se sustenta com a renda de hoje deixa a família vulnerável a qualquer queda, e nunca constrói patrimônio, porque tudo o que entra já tem dono.',
+      step:'No próximo aumento ou entrada extra, decida antes de gastar: metade vai para um objetivo da família. O padrão sobe devagar e o patrimônio sobe junto.'},
+  SM:{name:'Provedor sem Mapa',
+      sum:'Você guarda ou investe, mas sem número, prazo ou destino para a família.',
+      daily:['Existe dinheiro guardado, mas ninguém sabe dizer para quê.','Você não tem o valor mensal que precisa guardar para chegar ao objetivo.','A dúvida "será que estou no caminho certo?" nunca vira um plano.'],
+      cost:'Sem destino, o dinheiro guardado vira dinheiro disponível, e dinheiro disponível é o primeiro a ser gasto quando aparece um imprevisto ou um desejo.',
+      step:'Escolha um único objetivo da família, dê a ele um valor e uma data, e calcule quanto precisa guardar por mês. Um objetivo claro vale mais do que dez intenções.'},
+  EV:{name:'Ponto Cego',
+      sum:'Existe uma parte do dinheiro da família que você evita olhar de perto. Enquanto isso, o "mês que vem" segue sendo a resposta.',
+      daily:['Você sabe que precisa olhar, mas sempre encontra algo mais urgente.','Quanto mais o tempo passa, maior fica o desconforto de encarar os números.','A organização financeira fica sempre para o mês que vem.'],
+      cost:'O que não é olhado não é corrigido. O adiamento custa juros, oportunidades e tranquilidade, e o peso disso cai todo sobre você e sobre a sua família.',
+      step:'Reserve 20 minutos esta semana só para olhar. Sem julgar e sem corrigir nada ainda. Enxergar a situação real é o passo mais difícil e o que mais alivia.'},
+  CD:{name:'Casal Desalinhado',
+      sum:'O dinheiro da família é decidido sozinho, ou nunca é conversado.',
+      daily:['Uma pessoa concentra as decisões financeiras para poupar a outra.','Poucos números são compartilhados, e o assunto só aparece em discussão.','Se algo acontecesse com você, seu cônjuge não saberia por onde começar.'],
+      cost:'Carregar sozinho as decisões de dinheiro pesa e é frágil. Sem alinhamento, cada um puxa para um lado ou ninguém puxa, e a família perde tempo e patrimônio.',
+      step:'Marque 30 minutos com seu cônjuge, sem cobrança, só para responder juntos: quanto entra, quanto sai e qual é o nosso maior objetivo. Alinhamento vem antes de qualquer investimento.'}
+};
+var BASE = {name:'Base Sólida',
+  sum:'Seus hábitos já são consistentes. O próximo passo é dar estrutura ao que você construiu.',
+  daily:['Você acompanha seus gastos e decide para onde o dinheiro vai.','O que sobra tem destino, e existe clareza sobre o futuro da família.','O assunto dinheiro é conversado em casa, sem tensão.'],
+  costTitle:'Onde ainda há risco',
+  cost:'Bons hábitos sem estrutura por trás deixam a família exposta justamente no que não se vê no dia a dia: proteção incompleta, patrimônio parado e sucessão sem planejamento.',
+  step:'Revise se a estrutura acompanha o hábito: proteção da família, organização do patrimônio e planejamento sucessório. É onde costuma haver mais espaço para evoluir.'};
+
+var GOALS = {
+  other:'Objetivo específico informado por você',
+  edu:'Estudos e futuro dos filhos',
+  home:'Imóvel da família',
+  free:'Liberdade e aposentadoria tranquila',
+  safe:'Proteção da família contra imprevistos',
+  debt:'Sair das dívidas e começar a investir'
+};
+
+var Q = [
+ {t:'No fim do mês, o que costuma acontecer com o que sobrou?', w:1, opts:[
+   {t:'Nem sei se sobrou, só percebo que acabou.',k:'PA'},
+   {t:'Sobra, mas sempre aparece um upgrade "merecido" para a casa.',k:'UP'},
+   {t:'Guardo, sem saber pra quê nem quanto.',k:'SM'},
+   {t:'Prefiro nem olhar.',k:'EV'},
+   {t:'Separo no início do mês, com destino definido.',k:'OK'}]},
+ {t:'Quando sua renda subiu, o que mudou na prática?', w:1, opts:[
+   {t:'O padrão de vida subiu, a sobra ficou igual.',k:'UP'},
+   {t:'Não sei dizer, o dinheiro passou e foi.',k:'PA'},
+   {t:'Ficou mais dinheiro parado, sem plano.',k:'SM'},
+   {t:'Decidi sozinho(a) o que fazer com o aumento.',k:'CD'},
+   {t:'Direcionei parte a um objetivo da família antes de gastar.',k:'OK'}]},
+ {t:'Qual é o principal objetivo que você quer alcançar com o seu dinheiro?', w:0, goal:true, opts:[
+   {t:'Garantir os estudos e o futuro dos meus filhos.',g:'edu'},
+   {t:'Comprar ou quitar o imóvel da família.',g:'home'},
+   {t:'Ter liberdade para trabalhar menos e me aposentar com tranquilidade.',g:'free'},
+   {t:'Proteger minha família de imprevistos.',g:'safe'},
+   {t:'Sair das dívidas e me reorganizar para começar a investir.',g:'debt'},
+   {t:'Outro (quero escrever)',g:'other',other:true}]},
+ {t:'Como é a conversa sobre dinheiro na sua casa?', w:1, opts:[
+   {t:'Só quando aperta ou vem uma conta grande.',k:'PA'},
+   {t:'Decido quase tudo sozinho(a) para não preocupar meu cônjuge.',k:'CD'},
+   {t:'Conversamos bastante sobre gastos do dia a dia, mas nunca sobre metas ou objetivos.',k:'SM'},
+   {t:'Evito o assunto para não gerar briga.',k:'EV'},
+   {t:'Temos um momento fixo e decidimos as metas juntos.',k:'OK'},
+   {t:'Outro (quero escrever)',other:true}]},
+ {t:'Como você lida com fatura e extrato?', w:1, opts:[
+   {t:'Só abro quando a fatura chega e já é tarde.',k:'PA'},
+   {t:'Vejo que o gasto subiu, mas não mexo.',k:'UP'},
+   {t:'Evito abrir o app.',k:'EV'},
+   {t:'Acompanho, mas não sei o que fazer com o que vejo.',k:'SM'},
+   {t:'Reviso toda semana e ajusto.',k:'OK'}]},
+ {t:'Surge um gasto grande para a família (escola, viagem, carro). Como você decide?', w:1, opts:[
+   {t:'Vou pagando e vejo como fica no mês.',k:'PA'},
+   {t:'Se a parcela cabe na renda, eu fecho.',k:'UP'},
+   {t:'Decido e aviso depois.',k:'CD'},
+   {t:'Adio, porque não sei o quanto podemos gastar.',k:'EV'},
+   {t:'Comparo com o plano que já temos.',k:'OK'}]},
+ {t:'Se sua renda parasse por 6 meses, sua família...', w:1, opts:[
+   {t:'Aguentaria pouco: o padrão de vida depende todo da renda.',k:'UP'},
+   {t:'Tem algum dinheiro guardado, mas nunca calculei quantos meses dura.',k:'SM'},
+   {t:'Prefiro nem pensar nisso.',k:'EV'},
+   {t:'Meu cônjuge nem sabe onde está o que temos.',k:'CD'},
+   {t:'Sei exatamente quantos meses aguentaríamos.',k:'OK'}]},
+ {t:'Qual dessas frases você já disse ou pensou?', w:2, opts:[
+   {t:'"Não sei pra onde vai meu dinheiro."',k:'PA'},
+   {t:'"Ganho bem, mas não sobra."',k:'UP'},
+   {t:'"Guardo, mas não sei se estou fazendo certo."',k:'SM'},
+   {t:'"Mês que vem eu me organizo."',k:'EV'},
+   {t:'"Eu resolvo, meu cônjuge não precisa se preocupar."',k:'CD'}]},
+ {t:'Quando pensa no futuro dos seus filhos (estudo, herança, sua aposentadoria)...', w:1, opts:[
+   {t:'Sei que preciso agir, mas nunca comecei de verdade.',k:'EV'},
+   {t:'Vou guardando conforme dá, sem valor nem prazo.',k:'SM'},
+   {t:'Agora o foco é sustentar o padrão atual.',k:'UP'},
+   {t:'Nunca fizemos essa conta juntos.',k:'CD'},
+   {t:'Temos meta, prazo e valor definidos.',k:'OK'},
+   {t:'Não tenho filhos.',k:null}]},
+ {t:'O que mais te incomoda quando pensa no dinheiro da sua família hoje?', w:2, opts:[
+   {t:'Não saber para onde o dinheiro vai.',k:'PA'},
+   {t:'Ganhar bem e sentir que não sobra.',k:'UP'},
+   {t:'Não saber se estou no caminho certo.',k:'SM'},
+   {t:'Saber que estou adiando algo importante.',k:'EV'},
+   {t:'Carregar isso sozinho(a).',k:'CD'}]}
+];
+var TOTAL = Q.length;
+var KEYS = ['PA','UP','SM','EV','CD'];
+var MAX = {}, OKTOTAL = 0;
+KEYS.forEach(function(k){ MAX[k] = Q.reduce(function(a,q){ return a + (q.opts.some(function(o){return o.k===k;}) ? q.w : 0); },0); });
+Q.forEach(function(q){ if(q.opts.some(function(o){return o.k==='OK';})) OKTOTAL++; });
+
+var S = {screen:'intro', q:0, a:[], order:[], lead:null, res:null, locked:false, otherText:{}, otherActive:false};
+var app = document.getElementById('app');
+var DL = null;
+try { if(window.claude && window.claude.use){ window.claude.use('downloads').then(function(n){ DL = n; }).catch(function(){}); } } catch(e){}
+
+function esc(s){ return String(s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function shuffle(n){ var a=[],i,j,t; for(i=0;i<n;i++)a.push(i); for(i=n-1;i>0;i--){ j=Math.floor(Math.random()*(i+1)); t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+
+/* ---------- pontuação ---------- */
+function compute(){
+  var score={PA:0,UP:0,SM:0,EV:0,CD:0}, ok=0, goal=null, q8=null, q10=null, c1=0, c7=0;
+  Q.forEach(function(q,i){
+    var o=q.opts[S.a[i]];
+    if(q.goal){ goal=o.g; return; }
+    if(!o.k){ return; }
+    if(o.k==='OK') ok++; else score[o.k]+=q.w;
+    if(i===7) q8=o.k;
+    if(i===9) q10=o.k;
+    if(i===0) c1=({OK:2,SM:1})[o.k]||0;
+    if(i===6) c7=({OK:2,SM:1,CD:1})[o.k]||0;
+  });
+  var pct={}; KEYS.forEach(function(k){ pct[k]=Math.round(100*score[k]/MAX[k]); });
+  var rank=KEYS.slice().sort(function(x,y){
+    var d=(score[y]/MAX[y])-(score[x]/MAX[x]); if(d) return d;
+    d=(y===q10?1:0)-(x===q10?1:0); if(d) return d;
+    d=(y===q8?1:0)-(x===q8?1:0); if(d) return d;
+    return 0;
+  });
+  var solid = ok>=6;
+  var main = solid ? 'OK' : rank[0];
+  var second = solid ? rank[0] : rank[1];
+  var cs=c1+c7, cons = cs>=3 ? 'Regular' : (cs>=1 ? 'Parcial' : 'Irregular');
+  var goalOther = (S.otherText[2]||'').trim();
+  var note4 = (S.otherText[3]||'').trim();
+  return {main:main, second:second, pct:pct, rank:rank, goal:goal, goalOther:goalOther, note4:note4, cons:cons, ok:ok, solid:solid};
+}
+function info(k){ return k==='OK' ? BASE : LEAKS[k]; }
+function goalLabel(r){ return (r.goal==='other' && r.goalOther) ? r.goalOther : GOALS[r.goal]; }
+
+/* ---------- telas ---------- */
+function screenIntro(){
+  return '<section class="card">'+
+    '<h1 tabindex="-1">Onde o dinheiro da sua família está vazando?</h1>'+
+    '<p class="lead">Responda 10 perguntas sobre seus hábitos e descubra o padrão que impede sua renda de virar patrimônio.</p>'+
+    '<div class="pills"><span class="pill">10 perguntas</span><span class="pill">Cerca de 2 minutos</span><span class="pill">Diagnóstico em PDF</span></div>'+
+    '<button class="btn btn-primary" data-act="start">Começar o diagnóstico</button>'+
+    '<p class="by">Criado por Rafael Garbelini, consultor financeiro focado em comportamento e família.</p>'+
+  '</section>';
+}
+function screenQuestion(){
+  var i=S.q, q=Q[i];
+  if(!S.order[i]){
+    var normal=[], other=[];
+    q.opts.forEach(function(o,oi){ (o.other ? other : normal).push(oi); });
+    S.order[i]=shuffle(normal.length).map(function(k){ return normal[k]; }).concat(other);
+  }
+  var opts=S.order[i].map(function(oi){
+    var o=q.opts[oi];
+    return '<button type="button" class="opt" data-act="pick" data-oi="'+oi+'" aria-pressed="'+(S.a[i]===oi)+'">'+esc(o.t)+'</button>';
+  }).join('');
+  var otherBox='';
+  if(S.otherActive){
+    otherBox='<div class="otherbox"><label class="f" for="f-other">Conte rapidinho:</label>'+
+      '<input id="f-other" type="text" placeholder="Escreva aqui" maxlength="140" value="'+esc(S.otherText[i]||'')+'">'+
+      '<div class="nav"><button type="button" class="btn btn-primary" data-act="other-continue">Continuar</button></div></div>';
+  }
+  return '<section class="card">'+
+    '<div class="progress" role="progressbar" aria-valuemin="1" aria-valuemax="'+TOTAL+'" aria-valuenow="'+(i+1)+'"><i style="width:'+((i)/TOTAL*100)+'%"></i></div>'+
+    '<p class="step">Pergunta '+(i+1)+' de '+TOTAL+'</p>'+
+    '<h2 id="qt" tabindex="-1">'+esc(q.t)+'</h2>'+
+    '<div class="opts" role="group" aria-labelledby="qt">'+opts+'</div>'+otherBox+
+    '<div class="nav"><button type="button" class="btn btn-ghost" data-act="back">Voltar</button></div>'+
+  '</section>';
+}
+function screenGate(){
+  var L=S.lead||{};
+  var inc=INCOMES.map(function(v){ return '<option value="'+esc(v)+'"'+(L.income===v?' selected':'')+'>'+esc(v)+'</option>'; }).join('');
+  return '<section class="card">'+
+    '<div class="progress"><i style="width:100%"></i></div>'+
+    '<p class="step">Última etapa</p>'+
+    '<h2 tabindex="-1">Seu diagnóstico está pronto. Para onde envio?</h2>'+
+    '<p class="lead" style="font-size:16px;margin-bottom:6px">Preencha para ver onde sua renda está vazando.</p>'+
+    '<form id="gate" novalidate>'+
+      '<label class="f" for="f-name">Nome</label>'+
+      '<input id="f-name" type="text" autocomplete="given-name" placeholder="Como devo te chamar?" value="'+esc(L.name||'')+'">'+
+      '<div class="err" id="e-name"></div>'+
+      '<label class="f" for="f-tel">WhatsApp (com DDD)</label>'+
+      '<input id="f-tel" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(11) 99999-9999" value="'+esc(L.tel||'')+'">'+
+      '<div class="err" id="e-tel"></div>'+
+      '<label class="f" for="f-inc">Renda mensal aproximada</label>'+
+      '<select id="f-inc"><option value="">Selecione</option>'+inc+'</select>'+
+      '<div class="err" id="e-inc"></div>'+
+      '<label class="f" for="f-mail">E-mail (opcional)</label>'+
+      '<input id="f-mail" type="email" autocomplete="email" placeholder="seu@email.com" value="'+esc(L.mail||'')+'">'+
+      '<div class="err" id="e-mail"></div>'+
+      '<label class="check"><input id="f-lgpd" type="checkbox"'+(L.lgpd?' checked':'')+'><span>Concordo que Rafael Garbelini use estes dados para me enviar este diagnóstico e entrar em contato comigo. Tratamento conforme a LGPD (Lei nº 13.709/2018). Posso pedir a exclusão dos meus dados a qualquer momento pelo WhatsApp.</span></label>'+
+      '<div class="err" id="e-lgpd"></div>'+
+      '<div class="nav"><button type="button" class="btn btn-ghost" data-act="back">Voltar</button><button type="submit" class="btn btn-primary">Ver meu diagnóstico</button></div>'+
+    '</form>'+
+  '</section>';
+}
+function waLink(res, lead){
+  var main=info(res.main).name, sec=info(res.second).name;
+  var msg='Olá, Rafael! Fiz o diagnóstico financeiro da família e quero agendar minha reunião de diagnóstico.\n\n'+
+    'Nome: '+lead.name+'\n'+
+    'Principal padrão: '+main+'\n'+
+    (res.solid ? 'Ponto de atenção: ' : 'Padrão secundário: ')+sec+'\n'+
+    'Objetivo: '+goalLabel(res)+'\n'+
+    'Constância ao guardar: '+res.cons+'\n'+
+    'Renda mensal: '+lead.income+
+    (res.note4 ? '\nObservação sobre conversa financeira: '+res.note4 : '')+
+    (lead.mail ? '\nE-mail: '+lead.mail : '');
+  return 'https://wa.me/'+PHONE+'?text='+encodeURIComponent(msg);
+}
+function screenResult(){
+  var r=S.res, L=S.lead, m=info(r.main);
+  var order=KEYS.slice().sort(function(a,b){ return r.pct[b]-r.pct[a]; });
+  var bars=order.map(function(k){
+    var isMain = k===r.main;
+    return '<div class="row'+(isMain?' main':'')+'"><div class="lbl"><span>'+esc(LEAKS[k].name)+'</span><span>'+r.pct[k]+'%</span></div><div class="bar"><i data-w="'+r.pct[k]+'"></i></div></div>';
+  }).join('');
+  var daily=m.daily.map(function(d){ return '<li>'+esc(d)+'</li>'; }).join('');
+  var sec = r.second && r.pct[r.second]>0 ? '<p class="small" style="margin-top:12px">'+(r.solid?'Ponto de atenção: ':'Segundo padrão mais forte: ')+esc(LEAKS[r.second].name)+'.</p>' : '';
+  var goalLine = r.solid
+    ? 'Com hábitos sólidos, o passo seguinte rumo a este objetivo é dar estrutura: planejamento, proteção e alocação.'
+    : 'O padrão acima é, hoje, o principal obstáculo entre você e este objetivo.';
+  return '<section class="card" id="result">'+
+    '<p class="tag">Diagnóstico de '+esc(L.name)+'</p>'+
+    '<h1 class="leak" tabindex="-1">'+esc(m.name)+'</h1>'+
+    '<p class="sum">'+esc(m.sum)+'</p>'+
+    '<div class="facts">'+
+      '<div class="fact"><b>Seu objetivo principal</b><span>'+esc(goalLabel(r))+'</span></div>'+
+      '<div class="fact"><b>Constância ao guardar</b><span>'+esc(r.cons)+'</span></div>'+
+    '</div>'+
+    '<p class="small" style="margin:10px 0 0">'+goalLine+'</p>'+
+    '<h3>Quanto cada padrão aparece nas suas respostas</h3>'+
+    '<div class="bars">'+bars+'</div>'+sec+
+    '<h3>Como isso aparece no dia a dia</h3><ul class="list">'+daily+'</ul>'+
+    '<h3>'+esc(m.costTitle||'O que isso custa à sua família')+'</h3><p>'+esc(m.cost)+'</p>'+
+    '<h3>Seu primeiro passo</h3><p>'+esc(m.step)+'</p>'+
+    '<div class="cta noprint">'+
+      '<h3>Transforme este diagnóstico em plano</h3>'+
+      '<p>Converse com Rafael em uma reunião de diagnóstico gratuita. Sua mensagem já vai pronta, com o seu resultado.</p>'+
+      '<a class="btn btn-primary" href="'+waLink(r,L)+'" target="_blank" rel="noopener noreferrer">Chamar Rafael no WhatsApp</a>'+
+      '<button type="button" class="btn btn-ghost" data-act="pdf">Baixar meu diagnóstico em PDF</button>'+
+      '<p class="status" id="status" role="status" aria-live="polite"></p>'+
+    '</div>'+
+    '<button type="button" class="again noprint" data-act="again">Refazer o diagnóstico</button>'+
+  '</section>'+
+  '<p class="foot">Este diagnóstico tem caráter educacional e de autoconhecimento financeiro. Não constitui recomendação de investimento, consultoria regulada ou aconselhamento jurídico ou tributário. Diagnóstico criado por Rafael Garbelini.</p>';
+}
+
+function render(){
+  var html = S.screen==='intro' ? screenIntro() : S.screen==='q' ? screenQuestion() : S.screen==='gate' ? screenGate() : screenResult();
+  app.innerHTML = html;
+  window.scrollTo(0,0);
+  var h = app.querySelector('h1,h2'); if(h){ try{ h.focus({preventScroll:true}); }catch(e){} }
+  if(S.screen==='result'){
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){
+      app.querySelectorAll('.bar i').forEach(function(el){ el.style.width = el.getAttribute('data-w')+'%'; });
+    }); });
+  }
+  if(S.screen==='gate') bindGate();
+  if(S.otherActive){
+    var oi=document.getElementById('f-other');
+    if(oi) oi.addEventListener('keydown',function(ev){ if(ev.key==='Enter'){ ev.preventDefault(); document.querySelector('[data-act="other-continue"]').click(); } });
+  }
+}
+
+/* ---------- formulário ---------- */
+function maskPhone(v){
+  var d=v.replace(/\D/g,'').slice(0,11);
+  if(d.length<=2) return d.length?'('+d:'';
+  if(d.length<=6) return '('+d.slice(0,2)+') '+d.slice(2);
+  if(d.length<=10) return '('+d.slice(0,2)+') '+d.slice(2,6)+'-'+d.slice(6);
+  return '('+d.slice(0,2)+') '+d.slice(2,7)+'-'+d.slice(7);
+}
+function phoneDigits(v){ var d=v.replace(/\D/g,''); if(d.length>11 && d.indexOf('55')===0) d=d.slice(2); return d; }
+function setErr(id,msg){ var e=document.getElementById('e-'+id), f=document.getElementById('f-'+id); if(e) e.textContent=msg||''; if(f) f.setAttribute('aria-invalid', msg?'true':'false'); return !msg; }
+function bindGate(){
+  var tel=document.getElementById('f-tel');
+  tel.addEventListener('input',function(){ tel.value=maskPhone(tel.value); });
+  document.getElementById('gate').addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var name=document.getElementById('f-name').value.trim();
+    var telv=tel.value.trim(), d=phoneDigits(telv);
+    var inc=document.getElementById('f-inc').value;
+    var mail=document.getElementById('f-mail').value.trim();
+    var lgpd=document.getElementById('f-lgpd').checked;
+    var ok=true;
+    ok = setErr('name', name.length<2 ? 'Informe seu nome.' : '') && ok;
+    ok = setErr('tel', (d.length<10 || d.length>11 || Number(d.slice(0,2))<11) ? 'Informe o WhatsApp com DDD, por exemplo (11) 99999-9999.' : '') && ok;
+    ok = setErr('inc', !inc ? 'Selecione uma faixa de renda.' : '') && ok;
+    ok = setErr('mail', (mail && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail)) ? 'Confira o e-mail digitado ou deixe o campo em branco.' : '') && ok;
+    var le=document.getElementById('e-lgpd'); le.textContent = lgpd ? '' : 'Para ver o resultado, marque a autorização acima.'; ok = lgpd && ok;
+    S.lead={name:name, tel:telv, income:inc, mail:mail, lgpd:lgpd};
+    if(!ok){ var bad=document.querySelector('[aria-invalid="true"]'); if(bad) bad.focus(); return; }
+    S.res=compute(); S.screen='result'; render();
+  });
+}
+
+/* ---------- PDF ---------- */
+function pt(s){ return String(s).replace(/[“”]/g,'"').replace(/[‘’]/g,"'").replace(/[—–]/g,'-').replace(/…/g,'...'); }
+function buildPdf(){
+  var jsPDF=window.jspdf.jsPDF, doc=new jsPDF({unit:'mm',format:'a4'});
+  var W=210,H=297,M=18,CW=W-2*M,y=0, r=S.res, L=S.lead, m=info(r.main);
+  var navy=[8,19,31], orange=[210,105,46], grey=[100,116,128], ink=[22,34,46];
+  function ensure(h){ if(y+h>H-22){ doc.addPage(); y=M; } }
+  function para(txt,size,color,bold,after){
+    doc.setFont('helvetica',bold?'bold':'normal'); doc.setFontSize(size); doc.setTextColor(color[0],color[1],color[2]);
+    var lines=doc.splitTextToSize(pt(txt),CW), lh=size*0.3528*1.45;
+    lines.forEach(function(ln){ ensure(lh); y+=lh; doc.text(ln,M,y); });
+    y+=(after||0);
+  }
+  function head(txt){ y+=5; ensure(14); para(txt,13,navy,true,1.5); }
+  // faixa superior
+  doc.setFillColor(navy[0],navy[1],navy[2]); doc.rect(0,0,W,44,'F');
+  doc.setFillColor(orange[0],orange[1],orange[2]); doc.rect(0,44,W,1.4,'F');
+  doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(20); doc.text('Diagnóstico financeiro da família',M,22);
+  doc.setFont('helvetica','normal'); doc.setFontSize(10.5); doc.setTextColor(170,186,198);
+  doc.text(pt('Preparado para '+L.name+' em '+new Date().toLocaleDateString('pt-BR')),M,31);
+  doc.text('Rafael Garbelini',M,37);
+  y=53;
+  para('Seu principal padrão',10,grey,false,0);
+  para(m.name,26,navy,true,1);
+  para(m.sum,12.5,ink,false,3);
+  para('Objetivo principal: '+goalLabel(r),11,ink,true,0);
+  para('Constância ao guardar: '+r.cons,11,ink,true,2);
+  head('Quanto cada padrão aparece nas suas respostas');
+  var order=KEYS.slice().sort(function(a,b){ return r.pct[b]-r.pct[a]; });
+  order.forEach(function(k){
+    ensure(10); y+=6;
+    doc.setFont('helvetica', k===r.main?'bold':'normal'); doc.setFontSize(10.5); doc.setTextColor(ink[0],ink[1],ink[2]);
+    doc.text(pt(LEAKS[k].name),M,y);
+    var bx=M+52, bw=CW-52-14;
+    doc.setFillColor(228,234,239); doc.roundedRect(bx,y-3.2,bw,3.6,1.8,1.8,'F');
+    var fw=Math.max(0.1,bw*r.pct[k]/100);
+    if(r.pct[k]>0){ if(k===r.main) doc.setFillColor(orange[0],orange[1],orange[2]); else doc.setFillColor(120,146,166); doc.roundedRect(bx,y-3.2,fw,3.6,1.8,1.8,'F'); }
+    doc.setTextColor(ink[0],ink[1],ink[2]); doc.text(r.pct[k]+'%',M+CW,y,{align:'right'});
+    y+=1.5;
+  });
+  if(r.second && r.pct[r.second]>0){ y+=3; para((r.solid?'Ponto de atenção: ':'Segundo padrão mais forte: ')+LEAKS[r.second].name+'.',10,grey,false,0); }
+  head('Como isso aparece no dia a dia');
+  m.daily.forEach(function(d){
+    doc.setFont('helvetica','normal'); doc.setFontSize(10.5);
+    var lines=doc.splitTextToSize(pt(d),CW-6), lh=10.5*0.3528*1.45;
+    ensure(lh*lines.length); doc.setFillColor(orange[0],orange[1],orange[2]);
+    doc.circle(M+1.2,y+lh*0.62,0.7,'F');
+    doc.setTextColor(ink[0],ink[1],ink[2]);
+    lines.forEach(function(ln){ y+=lh; doc.text(ln,M+6,y); });
+    y+=1.2;
+  });
+  head(m.costTitle||'O que isso custa à sua família'); para(m.cost,10.5,ink,false,0);
+  head('Seu primeiro passo'); para(m.step,10.5,ink,false,1);
+  // chamada final
+  ensure(33); y+=5;
+  doc.setDrawColor(orange[0],orange[1],orange[2]); doc.setLineWidth(0.5); doc.setFillColor(253,240,232);
+  doc.roundedRect(M,y,CW,27,3,3,'FD');
+  doc.setFont('helvetica','bold'); doc.setFontSize(12.5); doc.setTextColor(navy[0],navy[1],navy[2]);
+  doc.text('Transforme este diagnóstico em plano',M+6,y+8);
+  doc.setFont('helvetica','normal'); doc.setFontSize(10.5); doc.setTextColor(ink[0],ink[1],ink[2]);
+  doc.text('Reunião de diagnóstico gratuita com Rafael Garbelini',M+6,y+15);
+  doc.setFont('helvetica','bold'); doc.text('WhatsApp: (11) 97067-8711',M+6,y+21.5);
+  y+=27;
+  var n=doc.getNumberOfPages();
+  for(var p=1;p<=n;p++){
+    doc.setPage(p); doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(grey[0],grey[1],grey[2]);
+    var f=doc.splitTextToSize(pt('Este diagnóstico tem caráter educacional e de autoconhecimento financeiro. Não constitui recomendação de investimento, consultoria regulada ou aconselhamento jurídico ou tributário.'),CW);
+    doc.text(f,M,H-14);
+  }
+  return doc.output('arraybuffer');
+}
+function slug(s){ return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') || 'familia'; }
+function setStatus(t){ var s=document.getElementById('status'); if(s) s.textContent=t; }
+async function doPdf(){
+  var canPdf = !!(window.jspdf && window.jspdf.jsPDF);
+  var dl = DL;
+  if(!dl && window.claude && window.claude.use){ try{ dl = await window.claude.use('downloads'); }catch(e){} }
+  if(canPdf && dl){
+    try{
+      var buf=buildPdf();
+      await dl.save({filename:'diagnostico-financeiro-'+slug(S.lead.name)+'.pdf', data:buf});
+      setStatus('PDF pronto para salvar.');
+    }catch(e){
+      if(e && e.code==='declined'){ setStatus('Download cancelado.'); }
+      else { setStatus('Não foi possível gerar o PDF aqui. Use a opção imprimir do navegador e salve como PDF.'); try{ window.print(); }catch(_){} }
+    }
+    return;
+  }
+  if(canPdf && !dl){
+    try{
+      var buf2=buildPdf(), blob=new Blob([buf2],{type:'application/pdf'}), url=URL.createObjectURL(blob), a2=document.createElement('a');
+      a2.href=url; a2.download='diagnostico-financeiro-'+slug(S.lead.name)+'.pdf';
+      document.body.appendChild(a2); a2.click(); a2.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); },4000);
+      setStatus('PDF baixado.');
+      return;
+    }catch(e){}
+  }
+  setStatus('Na janela de impressão, escolha "Salvar como PDF".');
+  try{ window.print(); }catch(e){ setStatus('Use a opção imprimir do navegador e escolha "Salvar como PDF".'); }
+}
+
+/* ---------- eventos ---------- */
+app.addEventListener('click',function(ev){
+  var b=ev.target.closest('[data-act]'); if(!b) return;
+  var act=b.getAttribute('data-act');
+  if(act==='start'){ S.screen='q'; S.q=0; render(); }
+  else if(act==='pick'){
+    if(S.locked) return;
+    var oi=Number(b.getAttribute('data-oi')), opt=Q[S.q].opts[oi];
+    S.a[S.q]=oi;
+    if(opt.other){
+      S.otherActive=true;
+      render();
+      var inp=document.getElementById('f-other'); if(inp) inp.focus();
+      return;
+    }
+    S.otherActive=false; S.locked=true;
+    app.querySelectorAll('.opt').forEach(function(o){ o.setAttribute('aria-pressed', o===b ? 'true':'false'); });
+    setTimeout(function(){
+      S.locked=false;
+      if(S.q<TOTAL-1){ S.q++; } else { S.screen='gate'; }
+      render();
+    },240);
+  }
+  else if(act==='other-continue'){
+    var inp=document.getElementById('f-other');
+    S.otherText[S.q]=(inp && inp.value || '').trim();
+    S.otherActive=false;
+    if(S.q<TOTAL-1){ S.q++; } else { S.screen='gate'; }
+    render();
+  }
+  else if(act==='back'){
+    if(S.otherActive){ S.otherActive=false; render(); return; }
+    if(S.screen==='gate'){ S.screen='q'; S.q=TOTAL-1; }
+    else if(S.q>0){ S.q--; } else { S.screen='intro'; }
+    render();
+  }
+  else if(act==='pdf'){ doPdf(); }
+  else if(act==='again'){ S={screen:'intro',q:0,a:[],order:[],lead:null,res:null,locked:false,otherText:{},otherActive:false}; render(); }
+});
+
+render();
+})();
+</script>
+</body>
+</html>
